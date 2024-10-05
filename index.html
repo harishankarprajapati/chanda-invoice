@@ -153,6 +153,7 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            
             font-size: 1em;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
@@ -319,7 +320,7 @@
             newRow.innerHTML = `<td><input type="text" placeholder="Beskrivelse"></td>
                           <td><input type="number" placeholder="Antal" oninput="calculateTotal(this)"></td>
                           <td><input type="number" placeholder="Pris" oninput="calculateTotal(this)"></td>
-                          <td class="total">0,00 DKK</td>
+                          <td class="total">0,00 Rs.</td>
                           <td class="no-print"><button class="material-icons remove-row" onclick="removeRow(this)">delete</button></td>`;
             table.appendChild(newRow);
         }
@@ -343,7 +344,7 @@
             const quantity = row.cells[1].getElementsByTagName('input')[0].value;
             const price = row.cells[2].getElementsByTagName('input')[0].value;
             const total = row.cells[3];
-            total.innerText = `${(quantity * price).toFixed(2)} DKK`;
+            total.innerText = `${(quantity * price).toFixed(2)} Rs.`;
             updateTotals();
         }
 
@@ -351,7 +352,7 @@
             const rows = document.querySelectorAll('#invoice-table tbody tr');
             let subtotal = 0;
             rows.forEach(row => {
-                const total = parseFloat(row.cells[3].innerText.replace(' DKK', ''));
+                const total = parseFloat(row.cells[3].innerText.replace(' Rs.', ''));
                 subtotal += total;
             });
             const taxRate = document.getElementById('tax').value / 100;
@@ -359,10 +360,10 @@
             const taxAmount = subtotal * taxRate;
             const discountAmount = subtotal * discountRate;
             const totalAmount = subtotal + taxAmount - discountAmount;
-            document.getElementById('subtotal').innerText = `${subtotal.toFixed(2)} DKK`;
-            document.getElementById('tax-amount').innerText = `${taxAmount.toFixed(2)} DKK`;
-            document.getElementById('discount-amount').innerText = `${discountAmount.toFixed(2)} DKK`;
-            document.getElementById('total').innerText = `${totalAmount.toFixed(2)} DKK`;
+            document.getElementById('subtotal').innerText = `${subtotal.toFixed(2)} Rs.`;
+            document.getElementById('tax-amount').innerText = `${taxAmount.toFixed(2)} Rs.`;
+            document.getElementById('discount-amount').innerText = `${discountAmount.toFixed(2)} Rs.`;
+            document.getElementById('total').innerText = `${totalAmount.toFixed(2)} Rs.`;
         }
     </script>
 </body>
